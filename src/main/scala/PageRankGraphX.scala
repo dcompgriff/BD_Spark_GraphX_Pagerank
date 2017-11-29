@@ -10,12 +10,15 @@ object PageRankGraphX {
     val graphFile = "/assignment3/soc-LiveJournal1.txt" // Should be some file on your system
     val spark = SparkSession.builder.appName("PageRankGraphX Application")
     	.config("spark.driver.memory","4g")
-	.config("spark.executor.memory","4g")
+	.config("spark.executor.memory","8g")
 	.config("spark.executor.cores","4")
 	.config("spark.driver.cores","4")
-	.config("spark.task.cpus", "1")
+	.config("spark.task.cpus", "2")
+	.config("spark.graphx.pregel.checkpointInterval", "2")
     	.getOrCreate()
    
+   spark.sparkContext.setCheckpointDir("/tmp/checkpoint")
+
 
     // Read and filter comments from graph file.
 //    val unfilteredGraphData = spark.read.textFile(graphFile).cache()
