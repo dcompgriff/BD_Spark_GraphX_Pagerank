@@ -58,7 +58,7 @@ object PageRankGraphX {
     def messageAggregator(rank1: Double, rank2: Double): Double = rank1 + rank2
 
     // Define the vertex function for setting the node rank.
-    def vertexFunction(vid: VertexId, vattr: Double, sum: Double): Double = damping + ((1.0-damping)*sum)
+    def vertexFunction(vid: VertexId, vattr: Double, sum: Double): Double = .15 + (.85*sum)
     
     // Define the message function for sending messages.
     def sendMessage(edgeTup: EdgeTriplet[Double, Double]) = Iterator((edgeTup.dstId, edgeTup.srcAttr * edgeTup.attr))
